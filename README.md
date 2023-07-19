@@ -1,1950 +1,686 @@
-# USING MONGODB IN GO
+# Brief of Head_First_Go
 
-## Introduction to MongoDB
+<br />
+<p align="center">
+  <img src="headfirst.png" />
+</p>
+<br />
 
-MongoDB is an open-source, cross-platform, distributed document database. MongoDB is developed by MongoDB Inc. and categorized as a NoSQL database.
+## Your brain on Go
 
----
+- Here you are trying learn something, while here your brain is, doing you a favor by making sure the learning doesn't stick. Your brain thinking, _Better leave room for more important things_
 
-#### GET STARTED
+### Chapter 1
 
-- [connect mongo to go](#insertOne)
+- [Ready, set, Go!](#ready_set_go)
+- [The Go Playground](#the_go_playground)
+- [What does it all mean?](#what_does_it_all_mean)
+- [Calling functions](#calling_functions)
+- [Using functions from other packages](#using_functions_from_other_packages)
+- [Function return values](#function_return_values)
+- [Strings](#strings)
+- [Runes](#runes)
+- [Booleans](#booleans)
+- [Numbers](#numbers)
+- [Types](#types)
+- [Declaring variables](#declaring_variables)
+- [Zero values](#zero_values)
+- [Short variable declarations](#short_variable_declarations)
+- [Naming rules](#naming_rules)
+- [Conversions](#conversions)
+- [Installing Go on your computer](#installing_Go_on_your_computer)
+- [Compiling Go code](#compiling_Go_code)
 
-#### INSERT DOCUMENTS
+### Chapter 2
 
-- [InsertOne](#insertOne)
-- [InsertMany](#insertMany)
+- [Calling methods](#calling_methods)
+- [Multiple return values from a function or method](#multiple_return_values_from_a_function_or_method)
+- [Option 1: Ignore the error return value with the blank identifier](#blank_identifier)
+- [Option 2: Handle the error](#handle_the_error)
+- [Conditionals](#conditionals)
+- [Avoid shadowing names](#avoid_shadowing_names)
+- [Blocks](#blocks)
+- [Blocks and variable scope](#blocks_and_variable_scope)
+- [Only one variable in a short variable declaration has to be new](#only_one_variable_has_to_be_new)
+- [Package names vs. import paths](#import_paths)
+- [Loops](#loops)
+- [Init and post statements are optional](#statements_are_optional)
+- [Create guessing game](#create_guessing_game)
 
-#### SELECT DOCUMENTS
+### Chapter 3
 
-- [FindOne](#findOne)
-- [Find](#find)
-
-#### COMPARESION QUERY OPERATORS
-
-- [$eq: Equal To Operator](#formatting_output)
-- [$lt: Less Than Operator](#declaring_functions)
-- [$lte: Less Than or Equal To Operator](#functions_and_variable_scope)
-- [$gt: Greater Than Operator](#error_values)
-- [$gte: Greater Than or Equal To Operator](#copies_of_the_arguments)
-- [$ne: Not Equal To Operator](#pointers)
-- [$in: In Operator](#pointer_types)
-- [$nin: Not In Operator](#using_pointers_with_functions)
-
-#### LOGICAL QUERY OPERATORS
-
-- [$and: Logical AND Opeartor](#formatting_output)
-- [$or: Logical OR Operator](#declaring_functions)
-- [$not: Logical NOT Operator](#functions_and_variable_scope)
-- [$nor: Logical NOR Operator](#error_values)
-
-#### ELEMENT QUERY OPERATORS
-
-- [$exists](#formatting_output)
-- [$type](#declaring_functions)
-
-#### ARRAY QUERY OPERATORS
-
-- [$size](#formatting_output)
-- [$elemMatch](#functions_and_variable_scope)
-
-#### SORTING & LIMITING
-
-- [sort(): Sorting documents](#formatting_output)
-- [limit(): Limiting documents](#declaring_functions)
-
-#### UPDATEING DOCUMENTS
-
-- [updateOne: Update one Document](#formatting_output)
-- [updateMany: Update Multiple Documents](#declaring_functions)
-- [$inc: Increase / Decrease Field Value](#functions_and_variable_scope)
-- [$min: Update Field Value](#error_values)
-- [$max: Update Field Value](#copies_of_the_arguments)
-- [$mul: Mutiply Field By a Number](#pointers)
-- [$unset: Remove Fields](#pointer_types)
-- [$rename: Rename Fields](#using_pointers_with_functions)
-
-#### DELETING DOCUMENTS
-
-- [deleteOne](#formatting_output)
-- [deleteMany](#declaring_functions)
-
-#### AGGREGATION
-
-- [Aggregation Pipeline](#formatting_output)
-- [$avg](#declaring_functions)
-- [$count](#functions_and_variable_scope)
-- [$sum](#error_values)
-- [$max](#copies_of_the_arguments)
-- [$min](#pointers)
-
-#### INDECXES
-
-- [MongoDB Indexes](#formatting_output)
-- [Create Index](#declaring_functions)
-- [Unique Index](#functions_and_variable_scope)
-- [Compound index](#error_values)
-- [Drop Index](#copies_of_the_arguments)
+- [Formatting output with Printf and Sprintf](#formatting_output)
+- [Declaring functions](#declaring_functions)
+- [Functions and variable scope](#functions_and_variable_scope)
+- [Error values](#error_values)
+- [Function parameters receive copies of the arguments](#copies_of_the_arguments)
+- [Pointers](#pointers)
+- [Pointer types](#pointer_types)
+- [Using pointers with functions](#using_pointers_with_functions)
 
 ---
 
-<div id="connect_mongo_to_go" />
+<div id="ready_set_go" />
 
-## Connect mongo to go
+## Ready set Go
 
-```go
+Back in 2007, the seach engine google had a problem,maintain programs with milions of lines of code that became very difficult, they had to compile the code into a runnable from, a process which at the time took the an hour, that start idea of create language of large scale application
+
+##### why Go lang
+
+- Fast compilation
+- Less cumbersome code
+- Unused memory freed automatically (garbage collection)
+- Easy to write software that does several operations simultaneously
+- Good support for processors with multiple cores
+
+One the cool feature about go is it can help you handle many users connecting at once.
+And no matter what youre writting, it will help you ensure that your code is easier to maintain and add to.
+
+---
+
+<div id="the_go_playground" />
+
+## The Go Playground
+
+The easiest way to try Go is to visit http://play.golang.org in your web
+browser that simple editor where you can enter Go code (Of course this only works if you have a stable internet connection) and its just for simple test and good enough for starting with Go
+
+---
+
+<div id="what_does_it_all_mean" />
+
+## What does it all mean?
+
+Every Go file starts with a package clause. A **Package** is a collection of code that does similar thing, like formatting strings or drawing images.
+
+The special package its main which is required if this code is going to be run directly (usually from the terminal)
+
+Next, Go files almost always have one or more imports statements. Each file needs to import other packages before its code can use the code those other packages contain.
+
+In other word instead you specify only the packages you need by import them
+
+The last part of every Go file is the actual code, which os often split up into one or more functions. A fucntion is a group of one or more lines of code that you can call(run)
+
+Function named main is special and thats a entry point fucntion and you can call another function inside of that
+
+Recap
+
+1. The packages clause
+2. Any import statements
+3. The actual code
+
+---
+
+<div id="calling_functions" />
+
+## Calling functions
+
+To call functions, type the function name sth like this: **Println()** and a pair of paratheses. Println can take one or more arguments: values and also Println can be called with no arguments and that acutually print a empty new line
+
+---
+
+<div id="using_functions_from_other_packages" />
+
+## Using functions from other packages
+
+Once we have imported the packages. we can access any fucntion it offers by typing the package name, a dot, and the name of the fucntion we want
+
+For example **fmt.Println()**
+
+Notice the function start with Capital letter that becuase of the nature of accessing the Go lang if you declare a function with capital letter
+that fucntion of fields are accessible from another package if you declare as lower case that fucntion just belong to only that package
+
+---
+
+<div id="function_return_values" />
+
+## Function return values
+
+Consider this example
+
+```Go
+
+package main
+
 import (
-	"context"
-	"fmt"
-	"log"
-	"time"
-
-	"go.mongodb.org/mongo-driver/bson"
-	"go.mongodb.org/mongo-driver/bson/primitive"
-	"go.mongodb.org/mongo-driver/mongo"
-	"go.mongodb.org/mongo-driver/mongo/options"
+  "math"
+  "strings"
 )
 
-const (
-	mongoURI           = "mongodb://localhost:27017"
-	dbName             = "bookDB"
-	collectionName     = "books"
-	idFieldName        = "_id"
-	prodDB             = "prodDB"
-	prodCollectionName = "products"
-)
-
-var (
-	ctx            = context.Background()
-	collection     *mongo.Collection
-	prodCollection *mongo.Collection
-)
-
-type User struct {
-	Name      string    `bson:"name,omitempty"`
-	Email     string    `bson:"email,omitempty"`
-	CreatedAt time.Time `bson:"created_at,omitempty"`
-	UpdatedAt time.Time `bson:"updated_at,omitempty"`
+func main(){
+  math.Floor(2.67)
+  strings.Title("head first go")
 }
+```
 
-type Product struct {
-	Name  string
-	Price int
-}
+When we call the fmt.Prrintln function, we don't need to communicate with it any further after that. We pass one or more value for Println to print, and we trust that it printed
+But some times a program needs to be abel to call a function and get data back functions in most programming language can have return values: avalue that the function computes and returns to its caller.
 
-func init() {
-	client, err := mongo.NewClient(options.Client().ApplyURI(mongoURI))
-	if err != nil {
-		log.Fatal(err)
-	}
+---
 
-	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
-	defer cancel()
+<div id="strings" />
 
-	err = client.Connect(ctx)
-	if err != nil {
-		log.Fatal(err)
-	}
+## Strings
 
-	collection = client.Database(dbName).Collection(collectionName)
-	prodCollection = client.Database(prodDB).Collection(prodCollectionName)
+A string is a series of bytes that usually represent text characters. You can define string directly within your code using **string literals**: text between double quotes
+
+Within strings, characters like newlines, tabs, and other charaters that would be hard to include program code can be represented with **escape sequences**: a backslash followed by charters that represent another character.
+
+\n --> A newline charater
+\t --> A tab charater
+\\" --> Double quotation marks
+\\\ --> A backslash
+
+---
+
+<div id="runes" />
+
+## Runes
+
+Whereas strings are usually used to represent a whole series of text characters, Go runes are used to represnt single characters
+
+String literals are written surrounded by double quotation marks ("), but rune literals are written with single quotation marks (')
+
+Go uses the Unicode standard for storing runes. Runes are kept as numeric codes, not the charcter themselves, if you print them you get numeric code in the output like A represent 65 or b represent 66 and etc...
+
+---
+
+<div id="boolean" />
+
+## Booleans
+
+Booleans values can be one of only values: true or false. They are especially useful with conditional statements
+
+---
+
+<div id="numbers" />
+
+## Numbers
+
+You can also define numbers directly in Go
+Go treat integers and floating point numbers as different types, so remember that a decimal point can be used to distinguish an integer from a floating-point number
+
+Go basic math operators work just like they do in most other languages.
+The + symbol is for addition, - for subtraction, \* for multiplication and / for division
+
+< and > use to compare two values and see if one is less then or greater thatn another. You can use == (thats two equal signs) to see if two values are equal,!= use of checking no equal, <= check for less and equal and last but not least >= check for greater and equal
+
+---
+
+<div id="types" />
+
+## Types
+
+We saw the math.Floor function earlier, which rounds a floating-point number down to the nearest whole number, and also strings.Title function which converts a string to title case but waht would happen if you pass string to Floor and a number to Title
+
+We get an error, values in Go are all classified into different types, for example integers can be used in math operations, strings can be capitalized
+
+Go is **statically typed**, which means that it knows what the types of your values are even before your program runs.
+
+One of the package which is allow us to find out the type of value is reflect package and TypeOf function
+
+---
+
+<div id="declaring_variables" />
+
+## Declaring variables
+
+In Go, a variable is a piece of storage containing a value. you can give a variable a name by using a variable declaration.
+Var keyword followed by the desired name and type of values the variable will hold.
+
+```Go
+var quantity int
+var length,width float64
+var customerName string
+
+quantity = 2
+customerName = "Damon Cole"
+// assigning multiple variables at once
+length,width = 1.2, 2.4
+```
+
+If you know beforehand what a variable value will be, you can declare variables and assign them values on the same line
+
+Assing new value to existing variabels, need to be values of the same type. Go static typing ensures you do not accidentally assing the wrong kind of value to a variable
+
+Also you can omit the variable type from the declaration when you want to assign and declare at the same time
+
+```Go
+var quantity = 4
+var length, width = 1.2, 2.4
+fmt.Println(reflect.TypeOf(quantity))
+```
+
+---
+
+<div id="zero_values" />
+
+## Zero values
+
+If you declare a variable without assigning it a value, that variable will contain the **zero value** for the numeric types, the zero value is actually 0
+The zero value for string variable is an empty string, and the zero value for bool variabels is false and for the other its nil
+
+---
+
+<div id="short_variable_declarations" />
+
+## Short variable declarations
+
+A short variable declaration. Instead of explicitly declaring the type of the variable and later assigning to it with =, you do both at once using :=.
+
+```Go
+quantity :=  4
+length, width := 1.2, 2.4
+customerName := "Damon Colee"
+```
+
+Because short variable declarations are so convenient and concise, they are used more often that regular declarations.
+
+---
+
+<div id="naming_rules" />
+
+## Naming rules
+
+Go has one simple set of rules that apply to the names of variables,
+functions, and types:
+
+- A name must begin with a letter, and can have any number of additional letters and numbers
+
+- If the name of variable, function, or type begins with a capital letter, it is considered **exported**
+
+- If a variable/function/type name begins with a lowercase letter, it is considered **unexported**
+
+- If a name consists of multiple words, each word after the first shoulb be capitalized like this: topPrice, RetryConnection this style called camel case
+
+- When the meaning of a name is obvious from the context, use abbreviate it like this: use i instead of index, max instead of maximum and ...
+
+---
+
+<div id="conversions" />
+
+## Conversions
+
+Math and comparison operations in Go require that the include values be of the same type
+But what if you want to compare int to float or convert a string to integer
+There is solution for that and use conversions . You just provide the type want to convert a vallue to
+
+```Go
+var myInt int = 2
+var floatValue := float64(myInt)
+```
+
+When making a conversion, be aware of how they might change the resulting
+For example, float64 variables can store fractional value but when you convert them to integers
+fractional portion is simply dropped
+
+---
+
+<div id="installing_Go_on_your_computer" />
+
+## Installing Go on your computer
+
+1. Visit http://golang.org in your web browser
+2. Select the installation package
+3. Visit the installation instruction page for your OS
+4. Open a new terminal or command prompt window
+5. Confirm Go wa installed by typing go version at the prompt and that return go version for you if install correctly
+
+---
+
+<div id="compiling_Go_code" />
+
+## Compiling Go code
+
+1. Using your favorite editor, save your first code
+2. Open a new terminal or command prompt
+3. In the terminal change dir to where file saved
+4. Run go fmt nameFile.go to clean up the code formatting
+5. Run go build namFile.go to compile the source code. This will add executable file to currect dir
+6. Run the executable file. On linux and macOs with this line **./nameFile** and on windows **namFile.exe**
+
+**Command Description**
+go build ==> Compiles source code files into binary files.
+go run ==> Compiles and runs a program, without saving an executable file.
+go fmt ==> Reformats source files using Go standard formatting.
+go version ==> Display the current Go version
+
+---
+
+<div id="calling_methods" />
+
+## Calling methods
+
+Methods: fucntions that are asscociated with values of a given type, the methods that may have seen attached to object in other languages, but they are a bit simpler
+
+The time package has a Time type that represents a date(year, month, day)
+Each time.Time value has a Year method that returns the year
+
+The time.Now function returns a new Time value for the current date and time
+
+**Methods are functions that are associated with values of a partucular type.**
+
+```go
+string.NewPlacer()
+replacer.Replace()
+```
+
+---
+
+<div id="multiple_return_values_from_a_function_or_method" />
+
+## Multiple return values from a function or method
+
+In most programming languages, fucntions and methods can only have a single return value, butn in Go they can return any number of values. in most cases function return an additional error value
+
+---
+
+<div id="blank_identifier" />
+
+## Option 1: Ignore the error return value with the blank identifier
+
+When we have a value that would normally be assigned to a variable, but that we do not intend to use, we can use Go **black identifier**, simply type a single underscore (\_) character in an assignment
+
+---
+
+<div id="handle_the_error" />
+
+## Option 2: Handle the error
+
+We can set condition on error and track when error happend and we can use log package which is has a Fatal fucntion that can do both of these Operations for us at once: log a message to the terminal and stop the program : means reporting an error that kills your program
+
+There is lot about error handling we talk about that later
+
+---
+
+<div id="conditionals" />
+
+## Conditionals
+
+Functions and methods like ReadString return an error value of nil, which basically means there is nothing there in other words if err is nil, it means there was no error
+
+An expression is evaluated, and if its result is true, the code in the conditional block body is executed. If its false, the conditional block is skipped
+
+`Conditional rely on a boolean expression`
+
+---
+
+<div id="avoid_shadowing_names" />
+
+## Avoid shadowing names
+
+Naming a variable error would be a bas idea, beacuse it would shadow the name of a type called error you should make sure it dosent have the same name as any existing fucntions,packages,types or other variables
+they can be create some issues later in your program
+
+---
+
+<div id="blocks" />
+
+## Blocks
+
+Declaring a variable like status without using it afterward is an error in Go. It seems a little strange that we re getting the error twice, but let disregard that for now
+Go code can be decided up into blocks, blocks are usually surrounded by curly braces {}
+The bodies of functions and conditinals are both blocks as well
+
+---
+
+<div id="blocks_and_variable_scope" />
+
+## Blocks and variable scope
+
+Eeach variable you declare has a scope: a portion of your code that it visible within. if you inside of scope and try to access variables from outside of scope you will get an error but oposite its can be you have access to variables from outside of scope to inside of scope
+
+---
+
+<div id="only_one_variable_has_to_be_new" />
+
+## Only one variable in a short variable declaration has to be new
+
+Its true that when the same variable is declared twice in tha same scope
+we get a compile error
+
+But as long as at least one variable name in short variable declarations is new, its allowed The new variable names are treated as a declaration, and the existing names are treated as an assignment
+
+---
+
+<div id="import_paths" />
+
+## Package names vs. import paths
+
+The math/rand package has a Intn fucntion that can generate a random number for us, so we will need to import math/rand. Then we will call rand. Intn to generate the random number
+
+math/rand refering to the package import path not its name an import path is just a unique string that identifies a package and that you use in an import statement
+
+the Go lang dosent require that a package name have anything to do with import path. but by convetion, the last or only segement of the import path is also used as the package name
+
+so thats why out import statement uses a path of math/rand, but our main function just uses the package name rand
+
+---
+
+<div id="loops" />
+
+## Loops
+
+you have probably encountered loops. When you need one or more statements executed over and over, you place them inside a loop
+Loops always begin with the for keyword. for is followed by three segments of code that control the loop:
+
+- An initialization (or init) statement that is usually used to initialize a variable
+
+- A condition expression that deremines when to break out of the loop
+
+- A post statement that runs after each iteration of the loop
+
+this loop print out 1 to 10
+
+```go
+for i:=0 ; i<10 ; i++{
+  fmt.Println(i)
 }
 ```
 
 ---
 
-<div id="insertOne" />
+<div id="statements_are_optional" />
 
-## InsertOne
+## Init and post statements are optional
 
-The insertOne() method allows you to insert a single document into a collection.
-
-The insertOne() method returns a document that contains the following fields:
-
-- acknowledged is a boolean value. It is set to true if the insert executed with write concern or false if the write concern was disabled.
-
-- insertedId stores the value of \_id field of the inserted document.
-
-Note that if the collection does not exist, the insertOne() method will also create the collection and insert the document into it.
-
-If you not provided a \_id mongoDB automatically added the \_id field and assigned it a unique ObjectId value.
+if you want, you can leave out the init and post statements from a loop, leaving only the conditon expression
 
 ```go
-func main() {
-      bookOne := Book{Title: "BookOne", Content: "lorem ipsum dolor sit amet, consectetur adipis"}
-      createdDoc, err := CreateBook(&bookOne)
-      if err != nil {
-            log.Fatal(err)
-      }
-      // resturn a insertedID
-      fmt.Println(createdDoc.InsertedID)
-      // result is : ObjectID("64591e8ee3dfdefd673f52fb")
-}
-
-func CreateBook(book *Book) (*mongo.InsertOneResult, error) {
-	book.CreatedAt = time.Now()
-	book.UpdatedAt = time.Now()
-
-	reuslt, err := collection.InsertOne(ctx, book)
-	if err != nil {
-		return nil, fmt.Errorf("failed to insert user: %w", err)
-	}
-
-	return reuslt, nil
+x := 1
+for x <= 3 {
+  fmt.Println(x)
 }
 ```
 
----
-
-<div id="insertMany" />
-
-## InsertMany
-
-The insertMany() allows you to insert multiple documents into a collection. Here is the syntax of the insertMany() method:
-
-The first argument is an array of documents that you want to insert into the collection.
-
-Second you can provide options for example you can provide the ordered which is a boolean value that determines whether MongoDB should perform an ordered or unordered insert.
-
-In this example we use insertMany() to create multiple document at same time also provide option order
-
-```go
-func main() {
-    bookOne := Book{Title: "BookOne", Content: "lorem ipsum dolor sit amet, consectetur adipis 1"}
-	bookTwo := Book{Title: "BookOne", Content: "lorem ipsum dolor sit amet, consectetur adipis 2"}
-	bookThree := Book{Title: "BookOne", Content: "lorem ipsum dolor sit amet, consectetur adipis 3"}
-	books := []interface{}{bookOne, bookTwo, bookThree}
-	createdDocs, err := CreateBooks(&books)
-	if err != nil {
-		log.Fatal(err)
-	}
-	// resturn a insertedIDs
-	fmt.Println(createdDocs.InsertedIDs...)
-    // result is : ObjectID("6459277549999f530f26a75b") ObjectID("6459277549999f530f26a75c") ...
-}
-
-func CreateBooks(books *[]interface{}) (*mongo.InsertManyResult, error) {
-	options := options.InsertMany().SetOrdered(true)
-	result, err := collection.InsertMany(ctx, *books, options)
-	if err != nil {
-		return nil, err
-	}
-	return result, nil
-}
-
-```
+also good to know the scope of any variable declared whithin a loops block is limited to that block
 
 ---
 
-<div id="findOne" />
+<div id="create_guessing_game" />
 
-## FindOne
-
-The findOne() returns a single document from a collection that satisfies the specified condition.
-
-The findOne() accepts two optional arguments: query and projection.
-
-- The query is a document that specifies the selection criteria.
-
-- The projection is a document that specifies the fields in the matching document that you want to return.
-
-If you omit the query, the findOne() returns the first document in the collection according to the natural order which is the order of documents on the disk.
-
-If you don’t pass the projection argument, then findOne() will include all fields in the matching documents.
-
-To specify whether a field should be included in the returned document, you use the following format:
-
-If the value is true or 1, MongoDB will include the field in the returned document. In case the value is false or 0, MongoDB won’t include it.
-
-By default, MongoDB always includes the \_id field in the returned documents. To suppress it, you need to explicitly specify \_id: 0 in the projection argument.
+## Create guessing game
 
 ```go
-func main() {
-    // Id book one in db : 645927692c02dcc2b96ba1e6
-    foundBook, err := findBook("645927692c02dcc2b96ba1e6")
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Printf("Read book with ID %v: %+v\n", "645927692c02dcc2b96ba1e6", *foundBook)
-      // result is : {
-      // Title:BookOne
-      // Content:lorem ipsum dolor sit amet, consectetur adipis 1
-      // CreatedAt:0001-01-01 00:00:00 +0000 UTC
-      // UpdatedAt:0001-01-01 00:00:00 +0000 UTC}
 
-      // Id not included because we set projection(_id:0)
-}
-
-func findBook(id string) (*Book, error) {
-	var book Book
-
-	objectID, err := primitive.ObjectIDFromHex(id)
-	if err != nil {
-		return nil, fmt.Errorf("failed to read book: %w", err)
-	}
-
-	query := bson.M{"_id": objectID}
-	projection := bson.M{"_id": 0}
-
-	opts := options.FindOne().SetProjection(projection)
-
-	err = collection.FindOne(ctx, query, opts).Decode(&book)
-	if err != nil {
-		if err == mongo.ErrNoDocuments {
-			return nil, fmt.Errorf("book not found")
-		}
-		return nil, fmt.Errorf("failed to read book: %w", err)
-	}
-
-	return &book, nil
-}
-
-```
-
----
-
-<div id="find" />
-
-## Find
-
-The find() method finds the documents that satisfy a specified condition and returns a cursor to the matching documents.
-
-The following shows the syntax of the find() method:
-
-Similar to the findOne() method, the find() method accepts two optional arguments.
-
-- query
-
-- projection
-
-```go
-func main() {
-    foundBooks, err := findBooks()
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Printf("books: ", *foundBooks)
-      // result is : [{
-      // Title:BookOne
-      // Content:lorem ipsum dolor sit amet, consectetur adipis 1
-      // CreatedAt:0001-01-01 00:00:00 +0000 UTC
-      // UpdatedAt:0001-01-01 00:00:00 +0000 UTC} ... ]
-
-      // Id not included because we set projection(_id:0)
-}
-
-func findBooks() (*[]Book, error) {
-	var books []Book
-
-	query := bson.M{}
-	projection := bson.M{"_id": 0}
-
-	opts := options.Find().SetProjection(projection)
-
-	cur, err := collection.Find(ctx, query, opts)
-	if err != nil {
-		if err == mongo.ErrNoDocuments {
-			return nil, fmt.Errorf("book not found")
-		}
-		return nil, fmt.Errorf("failed to read book: %w", err)
-	}
-
-	for cur.Next(ctx) {
-		var book Book
-		err := cur.Decode(&book)
-		if err != nil {
-			return nil, fmt.Errorf("failed to read book: %w", err)
-		}
-		books = append(books, book)
-	}
-
-	return &books, nil
-}
-
-```
-
----
-
-## $eq: Equal To Operator
-
-The $eq operator is a comparison query operator that allows you to match documents where the value of a field equals a specified value.
-
-In this example we check all the books wihch is titles equal to BookOne and as we know already Find() send back a cursor and for get all data we should loop through the books
-
-First inject some data to product data base
-
-```go
-func main() {
-	prodOne := Product{Name: "xPhone", Price: 799}
-	prodTwo := Product{Name: "xTablet", Price: 899}
-	prodThree := Product{Name: "SmartTablet", Price: 899}
-	prodFour := Product{Name: "SmartPad", Price: 699}
-	prodFive := Product{Name: "SmartPhone", Price: 599}
-
-	products := []interface{}{prodOne, prodTwo, prodThree, prodFour, prodFive}
-
-	prodCollection.InsertMany(ctx, products)
-}
-```
-
-<br>
-
-Now let find products with price equal to 899
-
-```go
-func main() {
-
-	result, err := equalTo()
-
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	fmt.Println(*result)
-	// result is : all products which is prices equal to 899
-	// [{xTablet 899} {SmartTablet 899}]
-
-}
-
-func equalTo() (*[]Product, error) {
-	var products []Product
-
-	filter := bson.M{"price": bson.M{"$eq": 899}}
-	cur, err := prodCollection.Find(ctx, filter)
-	if err != nil {
-		return nil, err
-	}
-
-	for cur.Next(ctx) {
-		var product Product
-		if err := cur.Decode(&product); err != nil {
-			return nil, err
-		}
-		products = append(products, product)
-	}
-
-	if err := cur.Err(); err != nil {
-		return nil, err
-	}
-
-	return &products, nil
-}
-
-```
-
----
-
-<div id="less_than_operator" />
-
-## $lt: Less Than Operator
-
-The $lt operator is a comparison query operator that allows you to select the documents where the value of a field is less than a specified value.
-
-lets find products where price is less than 799
-
-```go
-func main() {
-
-	result, err := lessThan()
-
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	fmt.Println(*result)
-	// result is : all products where price is less than 799
-	// [{SmartPad 699} {SmartPhone 599}]
-
-}
-
-func lessThan() (*[]Product, error) {
-	var products []Product
-
-	filter := bson.M{"price": bson.M{"$lt": 799}}
-	cur, err := prodCollection.Find(ctx, filter)
-	if err != nil {
-		return nil, err
-	}
-
-	for cur.Next(ctx) {
-		var product Product
-		if err := cur.Decode(&product); err != nil {
-			return nil, err
-		}
-		products = append(products, product)
-	}
-
-	if err := cur.Err(); err != nil {
-		return nil, err
-	}
-
-	return &products, nil
-}
-```
-
----
-
-## $lte: Less Than or Equal To Operator
-
-The $lte is a comparison query operator that allows you to select documents where the value of a field is less than or equal to ( <= ) a specified value.
-
-In this example we find the products where prices is less than or equal to 699
-
-```go
-func main() {
-
-	result, err := lessEqual()
-
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	fmt.Println(*result)
-	// result is : all products where price is less or equal to 699
-	// [{SmartPad 699} {SmartPhone 599}]
-
-}
-
-func lessEqual() (*[]Product, error) {
-	var products []Product
-
-	filter := bson.M{"price": bson.M{"$lte": 699}}
-	cur, err := prodCollection.Find(ctx, filter)
-	if err != nil {
-		return nil, err
-	}
-
-	for cur.Next(ctx) {
-		var product Product
-		if err := cur.Decode(&product); err != nil {
-			return nil, err
-		}
-		products = append(products, product)
-	}
-
-	if err := cur.Err(); err != nil {
-		return nil, err
-	}
-
-	return &products, nil
-}
-```
-
----
-
-## $gt: Greater Than Operator
-
-The $gt operator is a comparison query operator that allows you to select documents where the value of a field is greater than (>) a specified value.
-
-```go
-func main() {
-
-	result, err := greaterThan()
-
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	fmt.Println(*result)
-	// result is : all products where price is greater than 699
-	// [{xPhone 799} {xTablet 899} {SmartTablet 899}]
-
-}
-
-func greaterThan() (*[]Product, error) {
-	var products []Product
-
-	filter := bson.M{"price": bson.M{"$gt": 699}}
-	cur, err := prodCollection.Find(ctx, filter)
-	if err != nil {
-		return nil, err
-	}
-
-	for cur.Next(ctx) {
-		var product Product
-		if err := cur.Decode(&product); err != nil {
-			return nil, err
-		}
-		products = append(products, product)
-	}
-
-	if err := cur.Err(); err != nil {
-		return nil, err
-	}
-
-	return &products, nil
-}
-```
-
----
-
-## $gte: Greater Than or Equal To Operator
-
-The $gte is a comparison query operator that allows you to select documents where a value of a field is greater than or equal to ( i.e. >=) a specified value.
-
-In this example we find the products where price is less or euqal to 699
-
-```go
-func main() {
-
-	result, err := greaterEqual()
-
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	fmt.Println(*result)
-	// result is : all products where price is greater or equal to 699
-	// [{xPhone 799} {xTablet 899} {SmartTablet 899} {SmartPad 699}]
-
-}
-
-func greaterEqual() (*[]Product, error) {
-	var products []Product
-
-	filter := bson.M{"price": bson.M{"$gte": 699}}
-	cur, err := prodCollection.Find(ctx, filter)
-	if err != nil {
-		return nil, err
-	}
-
-	for cur.Next(ctx) {
-		var product Product
-		if err := cur.Decode(&product); err != nil {
-			return nil, err
-		}
-		products = append(products, product)
-	}
-
-	if err := cur.Err(); err != nil {
-		return nil, err
-	}
-
-	return &products, nil
-}
-```
-
----
-
-## $ne: Not Equal To Operator
-
-The $ne is a comparison query operator that allows you to select documents where the value of a filed is not equal to a specified value. It also includes documents that don’t contain the field.
-
-```go
-func main() {
-
-	result, err := notEqual()
-
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	fmt.Println(*result)
-	// result is : all products where price is not equal to 699
-	// [{xPhone 799} {xTablet 899} {SmartTablet 899} {SmartPhone 599}]
-
-}
-
-func notEqual() (*[]Product, error) {
-	var products []Product
-
-	filter := bson.M{"price": bson.M{"$ne": 699}}
-	cur, err := prodCollection.Find(ctx, filter)
-	if err != nil {
-		return nil, err
-	}
-
-	for cur.Next(ctx) {
-		var product Product
-		if err := cur.Decode(&product); err != nil {
-			return nil, err
-		}
-		products = append(products, product)
-	}
-
-	if err := cur.Err(); err != nil {
-		return nil, err
-	}
-
-	return &products, nil
-}
-```
-
----
-
-## $in: In Operator
-
-The $in is a comparison query operator that allows you to select documents where the value of a field is equal to any value in an array.
-
-```go
-unc main() {
-
-	result, err := hasTheseValues()
-
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	fmt.Println(*result)
-	// result is : all products where price is not equal to 699
-	// [{xTablet 899} {SmartTablet 899} {SmartPad 699}]
-
-}
-
-func hasTheseValues() (*[]Product, error) {
-	var products []Product
-
-	filter := bson.M{"price": bson.M{"$in": []int{699, 899}}}
-	cur, err := prodCollection.Find(ctx, filter)
-	if err != nil {
-		return nil, err
-	}
-
-	for cur.Next(ctx) {
-		var product Product
-		if err := cur.Decode(&product); err != nil {
-			return nil, err
-		}
-		products = append(products, product)
-	}
-
-	if err := cur.Err(); err != nil {
-		return nil, err
-	}
-
-	return &products, nil
-}
-```
-
----
-
-## $nin: Not In Operator
-
-The $nin is a query comparison operator that allows you to find documents where:
-
-- the value of the field is not equal to any value in an array
-- the field does not exist.
-
-```go
-func main() {
-
-	result, err := hasNotTheseValues()
-
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	fmt.Println(*result)
-	// result is : all products where price is not equal to 699
-	// [{xPhone 799} {SmartPhone 599}]
-
-}
-
-func hasNotTheseValues() (*[]Product, error) {
-	var products []Product
-
-	filter := bson.M{"price": bson.M{"$nin": []int{699, 899}}}
-	cur, err := prodCollection.Find(ctx, filter)
-	if err != nil {
-		return nil, err
-	}
-
-	for cur.Next(ctx) {
-		var product Product
-		if err := cur.Decode(&product); err != nil {
-			return nil, err
-		}
-		products = append(products, product)
-	}
-
-	if err := cur.Err(); err != nil {
-		return nil, err
-	}
-
-	return &products, nil
-}
-```
-
----
-
-## $and: Logical AND Opeartor
-
-The $and is a logical query operator that allows you to carry a logical AND operation on an array of one or more expressions.
-
-The $and operator returns true if all expressions evaluate to true.
-
-The $and operator stops evaluating the remaining expressions as soon as it finds an expression that evaluates to false. This feature is called **short-circuit evaluation**.
-
-```go
-func main() {
-
-	result, err := logicalAnd()
-
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	fmt.Println(*result)
-	// result is : all products where price is 599 and name is SmartPhone
-	// [{SmartPhone 599}]
-
-}
-
-func logicalAnd() (*[]Product, error) {
-	var products []Product
-
-	filter := bson.M{"$and": []bson.M{
-		{"price": 599},
-		{"name": "SmartPhone"},
-	}}
-	cur, err := prodCollection.Find(ctx, filter)
-	if err != nil {
-		return nil, err
-	}
-
-	for cur.Next(ctx) {
-		var product Product
-		if err := cur.Decode(&product); err != nil {
-			return nil, err
-		}
-		products = append(products, product)
-	}
-
-	if err := cur.Err(); err != nil {
-		return nil, err
-	}
-
-	return &products, nil
-}
-```
-
----
-
-## $or: Logical OR Operator
-
-The $or is a logical query operator that carries a logical OR operation on an array of one or more expressions and selects the documents that satisfy at least one expression.
-
-```go
-func main() {
-
-	result, err := logicalOr()
-
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	fmt.Println(*result)
-	// result is : all products where price is 699 or name is SmartPhone
-	// [{SmartPad 699} {SmartPhone 599}]
-
-}
-
-func logicalOr() (*[]Product, error) {
-	var products []Product
-
-	filter := bson.M{"$or": []bson.M{
-		{"price": 699},
-		{"name": "SmartPhone"},
-	}}
-	cur, err := prodCollection.Find(ctx, filter)
-	if err != nil {
-		return nil, err
-	}
-
-	for cur.Next(ctx) {
-		var product Product
-		if err := cur.Decode(&product); err != nil {
-			return nil, err
-		}
-		products = append(products, product)
-	}
-
-	if err := cur.Err(); err != nil {
-		return nil, err
-	}
-
-	return &products, nil
-}
-```
-
----
-
-## $not: Logical NOT Operator
-
-The $not operator is a logical query operator that performs a logical NOT operation on a specified **expression** and selects documents that do not match the **expression**. This includes the documents that do not contain the field.
-
-```go
-func main() {
-
-	result, err := logicalNot()
-
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	fmt.Println(*result)
-	// result is : all products where price is 699 or name is SmartPhone
-	// [{SmartPhone 599}]
-
-}
-
-func logicalNot() (*[]Product, error) {
-	var products []Product
-
-	filter := bson.M{"price": bson.M{"$not": bson.M{"$gte": 699}}}
-
-	cur, err := prodCollection.Find(ctx, filter)
-	if err != nil {
-		return nil, err
-	}
-
-	for cur.Next(ctx) {
-		var product Product
-		if err := cur.Decode(&product); err != nil {
-			return nil, err
-		}
-		products = append(products, product)
-	}
-
-	if err := cur.Err(); err != nil {
-		return nil, err
-	}
-
-	return &products, nil
-}
-```
-
----
-
-## $nor: Logical NOR Operator
-
-The $nor is a logical query operator that allows you to perform a logical NOR operation on a list of one or more query expressions and selects documents that fail all the query expressions.
-
-```go
-func main() {
-
-	result, err := logicalNotOR()
-
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	fmt.Println(*result)
-	// result is : all products where price is 699 or name is SmartPhone
-	// [{xPhone 799} {xTablet 899} {SmartTablet 899}]
-
-}
-
-func logicalNotOR() (*[]Product, error) {
-	var products []Product
-
-	filter := bson.M{
-		"$nor": []bson.M{
-			{"price": bson.M{"$lte": 699}},
-			{"name": "SmartPhone"},
-		},
-	}
-
-	cur, err := prodCollection.Find(ctx, filter)
-	if err != nil {
-		return nil, err
-	}
-
-	for cur.Next(ctx) {
-		var product Product
-		if err := cur.Decode(&product); err != nil {
-			return nil, err
-		}
-		products = append(products, product)
-	}
-
-	if err := cur.Err(); err != nil {
-		return nil, err
-	}
-
-	return &products, nil
-}
-```
-
----
-
-## $exists
-
-The `$exists` is an element query operator
-When the boolean_value is true, the $exists operator matches the documents that contain the field with any value including null.
-
-$exists operator matches the documents that have the price field including the non-null and null values.
-
-```go
-func main() {
-
-	result, err := exists()
-
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	fmt.Println(*result)
-	// result is : all products where price is not null
-	//  [{xPhone 799} {xTablet 899} {SmartTablet 899} {SmartPad 699} {SmartPhone 599}]
-	// In this example contain all products becuase all prices have value
-
-}
-
-func exists() (*[]Product, error) {
-	var products []Product
-
-	filter := bson.M{"price": bson.M{"$exists": true}}
-
-	cur, err := prodCollection.Find(ctx, filter)
-	if err != nil {
-		return nil, err
-	}
-
-	for cur.Next(ctx) {
-		var product Product
-		if err := cur.Decode(&product); err != nil {
-			return nil, err
-		}
-		products = append(products, product)
-	}
-
-	if err := cur.Err(); err != nil {
-		return nil, err
-	}
-
-	return &products, nil
-}
-
-```
-
----
-
-## $size
-
-The $size is an array query operator that allows you to select documents that have an array containing a specified number of elements.
-
-```go
-func main() {
-
-	result, err := size()
-
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	fmt.Println(*result)
-	// result is : all products where price contain 2 lements
-	// which is in this example is null array
-
-}
-
-func size() (*[]Product, error) {
-	var products []Product
-
-	filter := bson.M{"price": bson.M{"$size": 1}}
-
-	cur, err := prodCollection.Find(ctx, filter)
-	if err != nil {
-		return nil, err
-	}
-
-	for cur.Next(ctx) {
-		var product Product
-		if err := cur.Decode(&product); err != nil {
-			return nil, err
-		}
-		products = append(products, product)
-	}
-
-	if err := cur.Err(); err != nil {
-		return nil, err
-	}
-
-	return &products, nil
-}
-```
-
----
-
-## $elemMatch
-
-The $elemMatch is an array query operator that matches documents that contain an array field and the array field has at least one element that satisfies all the specified queries.
-
-```go
-func main() {
-
-	result, err := elemMatch()
-
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	fmt.Println(*result)
-	// result is : check array price and return all products where at least
-	// one of the price above the 200
-	// which is in this example is null array
-
-}
-
-func elemMatch() (*[]Product, error) {
-	var products []Product
-
-	filter := bson.M{"price": bson.M{"$elemMatch": bson.M{"$gt": 200}}}
-
-	cur, err := prodCollection.Find(ctx, filter)
-	if err != nil {
-		return nil, err
-	}
-
-	for cur.Next(ctx) {
-		var product Product
-		if err := cur.Decode(&product); err != nil {
-			return nil, err
-		}
-		products = append(products, product)
-	}
-
-	if err := cur.Err(); err != nil {
-		return nil, err
-	}
-
-	return &products, nil
-}
-```
-
----
-
-## sort(): Sorting documents
-
-The sort() method allows you to sort the matching documents by one or more fields (field1, field2, …) in ascending or descending order.
-
-The order takes two values: 1 and -1. If you specify { field: 1 }, the sort() will sort the matching documents by the field in ascending order:
-
-```go
-func main() {
-
-	result, err := sort()
-
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	fmt.Println(*result)
-	// result is : get all products where price greater than 600 and show just name and price
-	// then sort with price accending
-	// one of the price above the 200
-	// which is in this example is null array
-
-}
-
-func sort() (*[]Product, error) {
-	var products []Product
-
-	filter := bson.M{"price": bson.M{"$gt": 200}}
-	projection := bson.M{"_id": 0, "name": 1, "price": 1}
-
-	opts := options.Find().SetProjection(projection).SetSort(bson.M{"price": 1})
-
-	cur, err := prodCollection.Find(ctx, filter, opts)
-	if err != nil {
-		return nil, err
-	}
-
-	for cur.Next(ctx) {
-		var product Product
-		if err := cur.Decode(&product); err != nil {
-			return nil, err
-		}
-		products = append(products, product)
-	}
-
-	if err := cur.Err(); err != nil {
-		return nil, err
-	}
-
-	return &products, nil
-}
-```
-
----
-
-## limit(): Limiting documents
-
-The find() method may return a lot of documents to the application. Typically, the application may not need that many documents.
-
-To limit the number of returned documents, you use the limit() method:
-
-The skip(offset) requires the MongoDB server to scan from the beginning of the result set before starting to return the documents. When the (offset) increases, the skip() will become slower.
-
-```go
-func main() {
-
-	result, err := sort()
-
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	fmt.Println(*result)
-	// result is : get all products where price greater than 600 and show just name and price
-	// then sort with price accending
-	// one of the price above the 200
-	// which is in this example is null array
-
-}
-
-func sort() (*[]Product, error) {
-	var products []Product
-
-	filter := bson.M{"price": bson.M{"$gt": 200}}
-	projection := bson.M{"_id": 0, "name": 1, "price": 1}
-
-	opts := options.Find().SetProjection(projection).SetSort(bson.M{"price": 1}).SetLimit(50).SetSkip(0)
-
-	cur, err := prodCollection.Find(ctx, filter, opts)
-	if err != nil {
-		return nil, err
-	}
-
-	for cur.Next(ctx) {
-		var product Product
-		if err := cur.Decode(&product); err != nil {
-			return nil, err
-		}
-		products = append(products, product)
-	}
-
-	if err := cur.Err(); err != nil {
-		return nil, err
-	}
-
-	return &products, nil
-}
-```
-
----
-
-## findOneAndUpdate: Update one Document
-
-The findOneAndUpdate() method allows you to update a single document that satisfies a condition.
-
-Same as Find() here we can pass filter,options with filter we should filter to specific filed where we wanna chage most of the time we filter on unique field like \_id which is for each elemnt is unique also we can pass update fileds
-`db.collection.updateOne(filter, update, options)`
-
-The update is a document that specifies the change to apply.
-
-#### $set operator
-
-The (set) operator allows you to replace the value of a field with a specified value. The $set operator has the following syntax:
-
-**If the field doesn’t exist, the $set operator will add the new field with the specified value to the document as long as the new field doesn’t violate a type constraint.**
-
-```go
-func main() {
-
-	result, err := findOneAndUpdate()
-
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	fmt.Println(*result)
-	// result is : {xTablet 345345}
-
-}
-
-func findOneAndUpdate() (*Product, error) {
-	id, err := primitive.ObjectIDFromHex("6459b6400f70b1a5cd54c013")
-	if err != nil {
-		return nil, err
-	}
-
-	filter := bson.M{"_id": id}
-
-	update := bson.M{"$set": bson.M{"price": 345345}}
-
-	projection := bson.M{"_id": 0, "price": 1, "name": 1}
-
-	opts := options.FindOneAndUpdate().SetReturnDocument(options.After).SetProjection(projection)
-
-	var updatedProduct Product
-	err = prodCollection.FindOneAndUpdate(ctx, filter, update, opts).Decode(&updatedProduct)
-	if err != nil {
-		return nil, err
-	}
-
-	return &updatedProduct, nil
-}
-```
-
----
-
-## updateMany: Update Multiple Documents
-
-The updateMany() method allows you to update all documents that satisfy a condition.
-
-The following shows the syntax of the updateMany() method:
-
-`db.collection.updateMany(filter, update, options)`
-
-The query returns the following result:
-
-` MatchedCount: ,
-  ModifiedCount: ,
-  UpsertedCount: ,
-  UpsertedID:`
-
-```go
-func main() {
-
-	err := updateMany()
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	//fmt.Println(*result)
-	// result is : {xTablet 345345}
-
-}
-
-func updateMany() error {
-	filter := bson.M{"price": bson.M{"$gt": 800}}
-
-	update := bson.M{"$set": bson.M{"price": 990}}
-
-	opts := options.Update()
-
-	updatedProduct, err := prodCollection.UpdateMany(ctx, filter, update, opts)
-	if err != nil {
-		return nil
-	}
-
-	fmt.Println("MatchedCount", updatedProduct.MatchedCount)
-	fmt.Println("ModifiedCount", updatedProduct.ModifiedCount)
-	fmt.Println("UpsertedCount", updatedProduct.UpsertedCount)
-	fmt.Println("UpsertedID", updatedProduct.UpsertedID)
-
-	return nil
-}
-```
-
----
-
-## $inc: Increase / Decrease Field Value
-
-Sometimes, you need to increment the value of one or more fields by a specified value. In this case, you can use the update() method with the $inc operator.
-
-`{ $inc: {<field1>: <amount1>, <field2>: <amount2>, ...} }`
-
-if the field doesn’t exist, the $inc creates the field and sets the field to the specified amount.
-
-also we can decreased the fields using $inc
-
-```go
-func main() {
-
-	updatedProduct, err := inc()
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	fmt.Println(*updatedProduct)
-	// each time where we run program the value is increased
-	// result is : {xPhone 1040} run again : {xPhone 1090}
-}
-
-func inc() (*Product, error) {
-
-	id, err := primitive.ObjectIDFromHex("6459b6400f70b1a5cd54c012")
-	if err != nil {
-		return nil, err
-	}
-
-	filter := bson.M{"_id": id}
-
-	update := bson.M{"$inc": bson.M{"price": 50}}
-
-	projection := bson.M{"_id": 0, "price": 1, "name": 1}
-
-	opts := options.FindOneAndUpdate().SetReturnDocument(options.After).SetProjection(projection)
-
-	var updatedProduct Product
-	err = prodCollection.FindOneAndUpdate(ctx, filter, update, opts).Decode(&updatedProduct)
-	if err != nil {
-		return nil, err
-	}
-
-	return &updatedProduct, nil
-}
-```
-
----
-
-## $min: Update Field Value
-
-The $min operator is a field update operator that allows you to update the value of a field to a specified value if the specified value is less than (lt) the current value of the field.
-
-```go
-func main() {
-
-	updatedProduct, err := min()
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	fmt.Println(*updatedProduct)
-	// result is : {xPhone 500}
-	// updated because the price is higher than 500
-	// if run again program it dosn't work because now the price isnt higher
-	// than 500
-}
-
-func min() (*Product, error) {
-
-	id, err := primitive.ObjectIDFromHex("6459b6400f70b1a5cd54c012")
-	if err != nil {
-		return nil, err
-	}
-
-	filter := bson.M{"_id": id}
-
-	update := bson.M{"$min": bson.M{"price": 500}}
-
-	projection := bson.M{"_id": 0}
-
-	opts := options.FindOneAndUpdate().SetReturnDocument(options.After).SetProjection(projection)
-
-	var updatedProduct Product
-	err = prodCollection.FindOneAndUpdate(ctx, filter, update, opts).Decode(&updatedProduct)
-	if err != nil {
-		return nil, err
-	}
-
-	return &updatedProduct, nil
-}
-```
-
----
-
-## $max: Update Field Value
-
-#### the exact same like min but update value if that value not higher than previous value
-
----
-
-## $mul: Mutiply Field By a Number
-
-The $mul is a field update operator that allows you to multiply the value of a field by a specified number.
-
-The field that you want to update must contain a numeric value
-
-```go
-func main() {
-
-	updatedProduct, err := mul()
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	fmt.Println(*updatedProduct)
-	// previous number : {xPhone 280000}
-	// after multiply query result is : {xPhone 196000000}
-}
-
-func mul() (*Product, error) {
-
-	id, err := primitive.ObjectIDFromHex("6459b6400f70b1a5cd54c012")
-	if err != nil {
-		return nil, err
-	}
-
-	filter := bson.M{"_id": id}
-
-	update := bson.M{"$mul": bson.M{"price": 700}}
-
-	projection := bson.M{"_id": 0}
-
-	opts := options.FindOneAndUpdate().SetReturnDocument(options.After).SetProjection(projection)
-
-	var updatedProduct Product
-	err = prodCollection.FindOneAndUpdate(ctx, filter, update, opts).Decode(&updatedProduct)
-	if err != nil {
-		return nil, err
-	}
-
-	return &updatedProduct, nil
-}
-```
-
----
-
-## $unset: Remove Fields
-
-Sometimes, you may want to remove one or more fields from a document. In order to do it, you can use the $unset operator.
-
-The $unset is a field update operator that completely removes a particular field from a document.
-
-`{ $unset: {<field>: "", ... }}`
-
-```go
-func main() {
-
-	updatedProduct, err := unset()
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	fmt.Println(*updatedProduct)
-	// result is : { 196000000}
-	// name deleted
-}
-
-func unset() (*Product, error) {
-
-	id, err := primitive.ObjectIDFromHex("6459b6400f70b1a5cd54c012")
-	if err != nil {
-		return nil, err
-	}
-
-	filter := bson.M{"_id": id}
-
-	update := bson.M{"$unset": bson.M{"name": ""}}
-
-	projection := bson.M{"_id": 0}
-
-	opts := options.FindOneAndUpdate().SetReturnDocument(options.After).SetProjection(projection)
-
-	var updatedProduct Product
-	err = prodCollection.FindOneAndUpdate(ctx, filter, update, opts).Decode(&updatedProduct)
-	if err != nil {
-		return nil, err
-	}
-
-	return &updatedProduct, nil
-}
-```
-
----
-
-## $rename: Rename Fields
-
-Sometimes, you want to rename a field in a document e.g., when it is misspelled or not descriptive enough. In this case, you can use the $rename operator.
-
-The $rename is a field update operator that allows you to rename a field in a document to the new one.
-
-`{ $rename: { <field_name>: <new_field_name>, ...}}`
-
-```go
-func main() {
-
-	updatedProduct, err := rename()
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	fmt.Println(*updatedProduct)
-	// result is : { 990} name changed to fName
-}
-
-func rename() (*Product, error) {
-
-	id, err := primitive.ObjectIDFromHex("6459b6400f70b1a5cd54c013")
-	if err != nil {
-		return nil, err
-	}
-
-	filter := bson.M{"_id": id}
-
-	update := bson.M{"$rename": bson.M{"name": "fName"}}
-
-	projection := bson.M{"_id": 0}
-
-	opts := options.FindOneAndUpdate().SetReturnDocument(options.After).SetProjection(projection)
-
-	var updatedProduct Product
-	err = prodCollection.FindOneAndUpdate(ctx, filter, update, opts).Decode(&updatedProduct)
-	if err != nil {
-		return nil, err
-	}
-
-	return &updatedProduct, nil
-}
-```
-
----
-
-## deleteOne
-
-The deleteOne() method allows you to delete a single document from a collection.
-
-`db.collection.deleteOne(filter, option)`
-
-The deleteOne() method accepts two arguments:
-
-- filter
-
-- option
-
-deleteOne just return acknowledge of deleting instead we use FindOneAndDelete() to get data also
-
-```go
-func main() {
-
-	updatedProduct, err := deleteOne()
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	fmt.Println(*updatedProduct)
-	// result is : {SmartTablet 990}
-	// which is deleted from db
-}
-
-func deleteOne() (*Product, error) {
-	id, err := primitive.ObjectIDFromHex("6459b6400f70b1a5cd54c014")
-	if err != nil {
-		return nil, err
-	}
-
-	filter := bson.M{"_id": id}
-
-	projection := bson.M{"_id": 0}
-
-	opts := options.FindOneAndDelete().SetProjection(projection)
-
-	var deletedProduct Product
-	err = prodCollection.FindOneAndDelete(ctx, filter, opts).Decode(&deletedProduct)
-	if err != nil {
-		return nil, err
-	}
-
-	return &deletedProduct, nil
-}
-```
-
----
-
-## deleteMany
-
-The deleteMany() method allows you to remove all documents that match a condition from a collection.
-
-`db.collection.deleteMany(filter, option)`
-
-The deleteMany() returns a document containing the deleteCount field that stores the number of deleted documents.
-
-To delete a single document from a collection, you can use the deleteOne() method.
-
-```go
-func main() {
-
-	err := deleteMany()
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	// all the products has been deleted
-
-}
-
-func deleteMany() error {
-
-	filter := bson.M{"price": bson.M{"$gt": 500}}
-
-	result, err := prodCollection.DeleteMany(ctx, filter)
-	if err != nil {
-		return nil
-	}
-
-	fmt.Println(result.DeletedCount)
-	// return three becuase all products are price its bigger than 500
-
-	return nil
-}
-```
-
----
-
-## Aggregation Pipeline
-
-MongoDB aggregation operations allow you to process multiple documents and return the calculated results.
-
-Typically, you use **aggregation operations to group documents by specific field values** and perform aggregations on the grouped documents to return computed results.
-
-For example, you can use **aggregation operations to take a list of sales** orders and **calculate the total sales** amounts grouped by the products.
-
-To perform aggregation operations, you use aggregation pipelines. An **aggregation pipeline contains one or more stages** that process the input documents:
-
-Each stage in the aggregation pipeline performs an operation on the input documents and **returns the output** documents. **The output documents are then passed to the next stage**. The final stage returns the calculated result.
-
-The operations on each stage can be one of the following:
-
-- $project – select fields for the output documents.
-
-- $match – select documents to be processed.
-
-- $limit – limit the number of documents to be passed to the next stage.
-
-- $skip – skip a specified number of documents.
-
-- $sort – sort documents.
-
-- $group – group documents by a specified key.
-
-and so on ...
-
-`db.collection.aggregate([{ $match:...},{$group:...},{$sort:...}]);`
-
-In this example we calculate all price of products and resturn
-
-```go
-func main() {
-
-	totalPrice, err := getTotalPrice()
-
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	fmt.Println(totalPrice)
-
-}
-
-func getTotalPrice() (float64, error) {
-
-	pipeline := []bson.M{
-		{"$group": bson.M{
-			"_id": nil,
-			"totalPrice": bson.M{
-				"$sum": "$price",
-			},
-		}},
-	}
-
-	cursor, err := prodCollection.Aggregate(ctx, pipeline)
-	if err != nil {
-		return 0, err
-	}
-	defer func() {
-		if cerr := cursor.Close(ctx); cerr != nil {
-			err = cerr
-		}
-	}()
-
-	var result struct {
-		TotalPrice float64 `bson:"totalPrice"`
-	}
-
-	if cursor.Next(ctx) {
-		if err := cursor.Decode(&result); err != nil {
-			return 0, err
-		}
-	}
-
-	return result.TotalPrice, nil
-}
-```
-
----
-
-## $avg
-
-The MongoDB avg returns the average value of numeric values. The syntax of the $avg is as follows:
-
-**The $avg ignores the non-numeric and missing values. If all values are non-numeric, the $avg returns null.**
-
-```go
-func main() {
-
-	averagePrice, err := getAveragePrice()
-
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	fmt.Println(averagePrice)
-
-}
-
-func getAveragePrice() (float64, error) {
-
-	pipeline := []bson.M{
-		{"$group": bson.M{
-			"_id": nil,
-			"averagePrice": bson.M{
-				"$avg": "$price",
-			},
-		}},
-	}
-
-	cursor, err := prodCollection.Aggregate(ctx, pipeline)
-	if err != nil {
-		return 0, err
-	}
-	defer func() {
-		if cerr := cursor.Close(ctx); cerr != nil {
-			err = cerr
-		}
-	}()
-
-	var result struct {
-		AveragePrice float64 `bson:"averagePrice"`
-	}
-
-	if cursor.Next(ctx) {
-		if err := cursor.Decode(&result); err != nil {
-			return 0, err
-		}
-	}
-
-	return result.AveragePrice, nil
-}
-```
-
----
-
-## $count
-
-MongoDB $count returns the number of documents in a group. Here’s the syntax of the
-
-Note that the $count does not accept any parameters.
-
-The $count is functionally equivalent to using the following $sum in the $group stage:
-
-`{ $sum: 1 }`
-
-```go
+package main
+
+import (
+  "bufio"
+  "fmt"
+  "log"
+  "os"
+  "strconv"
+  "stirings"
+  "time"
+  )
 
 func main() {
+  seconds := time.Now().Unix()
+  rand.Seed(seconds)
+  target := rand.Intn(100)+1
+  fmt.Println("I have chosen a random number between 1 and 100")
+  fmt.Println("Can you guess it?")
 
-	totalPrice, err := count()
+  reader := bufio.NewReader(os.Stdin)
+  success := false
 
-	if err != nil {
-		log.Fatal(err)
-	}
+  for guesses := 0 ; guesses < 10 ; guesses++ {
+    fmt.Println("You have 10-guesses")
+    fmt.Print("Make a guess ? ")
+    input, err := reader.ReadString("\n")
+    if err != nil{
+      log.Fatal(err)
+    }
+    input = strings.TrimSpace(input)
+    guess, err := strconv.Atoi(input)
+    if err != nil{
+      log.Fatal(err)
+    }
 
-	fmt.Println(totalPrice)
+    if guess < target {
+      fmt.Println("Oops your guess was low")
+    } else if guess > target{
+      fmt.Println("Oops your guess was high")
+    }else {
+      success = true
+      fmt.Println("GOOD JOB!")
+      break
+    }
+  }
 
-}
-
-func count() (float64, error) {
-
-	pipeline := []bson.M{
-		{"$group": bson.M{
-			"_id": nil,
-			"countDocs": bson.M{
-				"$count": bson.M{},
-			},
-		}},
-	}
-
-	cursor, err := prodCollection.Aggregate(ctx, pipeline)
-	if err != nil {
-		return 0, err
-	}
-	defer func() {
-		if cerr := cursor.Close(ctx); cerr != nil {
-			err = cerr
-		}
-	}()
-
-	var result struct {
-		CountDocs float64 `bson:"countDocs"`
-	}
-
-	if cursor.Next(ctx) {
-		if err := cursor.Decode(&result); err != nil {
-			return 0, err
-		}
-	}
-
-	return result.CountDocs, nil
+  if !success {
+    fmt.Println("Sorry, you lost")
+  }
 }
 ```
 
 ---
 
-## $max
+<div id="formatting_output" />
 
-The MongoDB (max) returns the maximum value. The $max operator uses both value and type for comparing according to the BSON
+## Formatting output with Printf and Sprintf
 
-If you apply the (max) to the field that has a null or missing value in all documents, the $max returns null.
+The Sprintf function work just like printf, except that it returns a formatted string instead of print it
 
-However, if you apply the (max) to the field that has a null or missing value in some documents, but not all, the (max) only considers non-null and non-missing values for that field.
+- Formatting verbs (the %0.2 in the strings above is a verb)
+- Value width (that the 0.2 in the middle of the verb)
+
+`verb output`
+`%f Floating-point number`
+`%s String`
+`%t Boolean (true or false)`
+`%v Any value (choosen an approprate format based the supplied value type)`
+`%#v Any value, formatted as it would appear in Go program code`
+`%T Type of the supplied value (int string etc)`
+
+---
+
+<div id="declaring_functions" />
+
+## Declaring functions
+
+A simple function declaration might look like this
 
 ```go
-func main() {
-
-	totalPrice, err := aggregateMax()
-
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	// max price in all documents
-	fmt.Println(totalPrice)
-
+func sayHi() {
+  fmt.Println("Hi")
 }
+```
 
-func aggregateMax() (float64, error) {
+A declaration begins with the func keyword followed by the name want the function
+to have
 
-	pipeline := []bson.M{
-		{"$group": bson.M{
-			"_id": nil,
-			"maxPrice": bson.M{
-				"$max": "$price",
-			},
-		}},
-	}
+The rules for variable names:
 
-	cursor, err := prodCollection.Aggregate(ctx, pipeline)
-	if err != nil {
-		return 0, err
-	}
-	defer func() {
-		if cerr := cursor.Close(ctx); cerr != nil {
-			err = cerr
-		}
-	}()
+- A name must begin with a **capital letter are expoted**
 
-	var result struct {
-		MaxPrice float64 `bson:"maxPrice"`
-	}
+- Names with multiple words should use camelcase
 
-	if cursor.Next(ctx) {
-		if err := cursor.Decode(&result); err != nil {
-			return 0, err
-		}
-	}
+---
 
-	return result.MaxPrice, nil
-}
+<div id="functions_and_variable_scope" />
+
+## Functions and variable scope
+
+As with conditional and loop blocks, within function block are only in scope within that function blocks. variable at the package level access it within any function that package
+
+---
+
+<div id="error_values" />
+
+## Error values
+
+If you need to format numbers or other values for use in your error message, you can use the fmt.Errorf() or you can use built in error package in Go which is take message and return error, error.New()
+
+---
+
+<div id="declaring_multiple_return_values" />
+
+## Declaring multiple return values
+
+To declare multiple return values for a function, place the return types in a second set of paranthese in the function declaration
+
+You can also specify a name for return type of value it make the purpose of the return values clearer, The main purpose of named return values is as documentation for programming reading the code.
+
+---
+
+<div id="copies_of_the_arguments" />
+
+## Function parameters receive copies of the arguments
+
+When you call a function that has parameters declared, you need to provide arguments to the call. The value in each argument is copied to the corresponding parameter variable. pass by value
+
+Go is a pass-by-value language fucntion parameters receive a copy of the arguments from the function call
+
+---
+
+<div id="pointers" />
+
+## Pointers
+
+You can get the address of a variable using & which is Go s address of operator
+We can get address for variables of any type. Notice that the address diffres for each variable
+
+Values that represent the address of a variable are known as pointers, because they point to the location where the variable can be found
+
+---
+
+<div id="pointer_types" />
+
+## Pointer types
+
+The type of a pointer is written with * symbol for example *int you can read that aloud as ponter int
+
+A pointer variable can only hold ponters to one type of value, so a variable might only hold *int ponters, only *float64 and so on
+
+```go
+var myBool bool
+myBoolPointer := & myBool
+fmt.Println(myBoolPointer) // address of myBool value
 ```
 
 ---
 
-## $min
+<div id="using_pointers_with_functions" />
 
-#### Same as $max, but returns minimum value in the group
+## Using pointers with functions
 
----
+Its possible to return pointer from function, just declare that the fucntion return type is a pointer type
 
-## MongoDB Indexes
+```go
+func createPonter () *float64 {
+  var myFloat = 98.5
+  return &myFloat
+}
 
----
+func main(){
+  var myFloatPointer *float64 = createPonter()
+  fmt.Println(&myFloatPointer)
+}
+```
 
-## Create Index
-
----
-
-## Unique Index
-
----
-
-## Compound index
-
----
-
-## Drop Index
+Its okey to return a ponter to a variable that local to a function. Even though that variable is no longer is scope, as long as you still have the pointer, Go will ensure you can still access the value
 
 ---
